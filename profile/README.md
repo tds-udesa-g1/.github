@@ -21,8 +21,12 @@
 ## 3. Deuda Técnica
 *Registro de los atajos tomados a nivel de código, arquitectura o infraestructura que permitieron acelerar el desarrollo a corto plazo, pero que requerirán una refactorización o corrección futura para asegurar la mantenibilidad.*
 
+* **Intermediario Web para Enlaces de Correo:** Refactorizar el flujo de enlaces en correos electrónicos mediante la implementación de una página web intermediaria (vía HTTPS). Actualmente se utiliza el esquema personalizado de la aplicación de forma directa, el cual es bloqueado proactivamente por los filtros de seguridad de clientes como Gmail.
+* **Paginación y Escalabilidad en la Lista de Chats:** Implementar un mecanismo de paginación o scroll infinito en la pantalla de "Lista de Chats". En su estado actual, la vista está limitada a renderizar únicamente los 20 amigos con los que el usuario interactuó más recientemente, impidiendo el acceso a conversaciones más antiguas si se supera dicho límite.
+
 ## 4. Lecciones Aprendidas
 *Conocimientos adquiridos, prácticas que funcionaron bien y procesos que deben mejorarse a nivel técnico y metodológico.*
 
 * **Aspectos Positivos (Qué mantener):**
     * La división en microservicios facilitó el trabajo en paralelo sin generar conflictos en los repositorios.
+    * La decisión de priorizar el estado local de la aplicación combinado con peticiones estratégicas al servidor (mediante useFocusEffect y Pull-to-Refresh) resultó ser un excelente balance para la experiencia de usuario (UX). Evitó el sobre-diseño y el alto consumo de recursos en el servidor que hubiera implicado el uso excesivo de WebSockets para pantallas estáticas.
